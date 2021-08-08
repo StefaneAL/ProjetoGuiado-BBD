@@ -15,4 +15,6 @@ app.use('/estudios', estudiosRouter)
 const titulosRouter = require('./src/routes/titulos.routes')
 app.use('/titulos', titulosRouter)
 
-app.listen(PORT, () => console.log(`listening on port ${PORT}`))
+app.listen(PORT, () => {
+    console.log(`listening on port ${PORT}`)
+})

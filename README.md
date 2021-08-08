@@ -9,8 +9,8 @@
 - [ ]  **"/titulos/ghibli"** Deverá retornar todos os títulos com o estudio Ghibli
 - [ ]  **"/titulos/pixar"** Deverá retornar todos os títulos com o estudio Pixar
 
-- [ ]  **"/estudios"** Deverá retornar todos os estudios cadastrados
-- [ ]  "**/titulos**" Deverá retornar todos os títulos cadastrados, cada um fazendo referencia ao seu respectivo estudio
+-  ✅   **"/estudios"** Deverá retornar todos os estudios cadastrados
+- ✅  "**/titulos**" Deverá retornar todos os títulos cadastrados, cada um fazendo referencia ao seu respectivo estudio
 
 - [ ]  "**/estudios**" Deverá criar um estudio 
 - [ ]  "**/titulos**"  Deverá criar um título 
@@ -95,3 +95,10 @@
 ```
 <br>
 <br>
+
+
+
+## *Aqui vai cada emoção que senti no momento de cumprir os requisitos*
+* Já tinhamos feito os {GET} para checar `estudio` e `titulo` em aula e tambem fizemos o {POST} para criar o `estudio`, eu tive um pouco de dificuldade em usar o `.populate` então, depois de alguma pesquisa, entendi que meu ero estava na forma como estava declarando o `"_id":` no `Postman`, mas depois de compreender as etapas comecei a cadastrar os`titulo`. 
+
+* 

@@ -25,5 +25,4 @@ const tituloSchema = new mongoose.Schema({
     default: new Date
   }
 })
-
 module.exports = mongoose.model('titulo', tituloSchema)

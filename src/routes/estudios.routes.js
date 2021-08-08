@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
 
   if(estudioJaExiste){
     return res.status(409).json({
-      erro: 'Estudio ja cadastrado'
+      erro: 'Estudio já cadastrado'
     })
   }
 
