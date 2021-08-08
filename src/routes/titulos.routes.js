@@ -21,11 +21,23 @@ router.post('/', async (req, res) => {
     criadoEm: req.body.criadoEm
   })
 
+  const tituloJaExistente = await Titulo.findOne({
+    nome: req.body.nome
+  })
+
+  if(tituloJaExistente){
+    return res.status(409).json({
+      erro: 'Titulo já existente'
+    })
+  }
+
   try {
     const novoTitulo = await titulo.save()
     res.status(201).json(novoTitulo)
   } catch (err) {
-    res.status(400).json({ message: err.message})
+    res.status(400).json({
+       message: err.message
+      })
   }
 })
 
