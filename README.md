@@ -5,9 +5,11 @@
 ## o contrato consiste em :
 
 ### Requisitos 
+find/filter
 - [ ]  **"/titulos/marvel"** Deverá retornar todos os títulos com o estudio Marvel
 - [ ]  **"/titulos/ghibli"** Deverá retornar todos os títulos com o estudio Ghibli
 - [ ]  **"/titulos/pixar"** Deverá retornar todos os títulos com o estudio Pixar
+
 
 - ✅   **"/estudios"** Deverá retornar todos os estudios cadastrados
 - ✅  **"/titulos"** Deverá retornar todos os títulos cadastrados, cada um fazendo referencia ao seu respectivo estudio
@@ -19,7 +21,7 @@
 - [ ]  "/estudios/[ID]" Deverá deletar estudio por id específico e retorna mensagem amigável
 
 - [ ]  "/titulos/[ID]" Deverá alterar informação específica dentro de um titulo por id específico e retorna o título alterado
-- [ ]  "/estudios/[ID]" Deverá alterar informação específica dentro de um estudio por id específico e retorna o título alterado
+- [ ]  "/estudios/[ID]" Deverá alterar informação específica dentro de um estudio por id específico e retorna o estudio alterado
 
 
 ### Regras de negócio
@@ -106,7 +108,7 @@
   <img src="https://media.giphy.com/media/43VhxnrEOQ44U/giphy.gif" width="150" height="100" />
 
 
- ### ficou assim 
+ ### Ficou assim : 
   * **"/estudios"** Deverá retornar todos os estudios cadastrados
   ```javascript
   router.get('/', async (req, res) => {

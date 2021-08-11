@@ -1,44 +1,14 @@
 
 const express = require('express')
 const router = express.Router()
-const mongoose = require('mongoose')
-const Titulo = require('../models/titulo')
+const controller = require("../controllers/titulosControllers")
 
 //listar todos os titulos/get/find
-router.get('/', async (req, res) => {
-  const titulos = await Titulo.find().populate("estudio")
-  res.status(200).json(titulos)
-})
+router.get('/',controller.getAll )
 
 //criar um novo titulo/post/save
-router.post('/', async (req, res) => {
-  const titulo = new Titulo({
-    _id: new mongoose.Types.ObjectId(),
-    nome: req.body.nome,
-    genero: req.body.genero,
-    descricao: req.body.descricao,
-    estudio: req.body.estudio,
-    criadoEm: req.body.criadoEm
-  })
+router.post('/', controller.criateTitle)
 
-  const tituloJaExistente = await Titulo.findOne({
-    nome: req.body.nome
-  })
-
-  if(tituloJaExistente){
-    return res.status(409).json({
-      erro: 'Titulo já existente'
-    })
-  }
-
-  try {
-    const novoTitulo = await titulo.save()
-    res.status(201).json(novoTitulo)
-  } catch (err) {
-    res.status(400).json({
-       message: err.message
-      })
-  }
-})
+///"/titulos/[ID] altera informação específica 
 
 module.exports = router
