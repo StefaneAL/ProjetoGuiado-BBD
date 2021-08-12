@@ -12,8 +12,9 @@ router.post('/', controller.criateStudio)
 //listar um estudio/get/findById
 
 //atualizar uma informacao especifica num estudio
-router.patch("/:id", controller.updateStudio)
+router.patch('/:id', controller.updateEstudio)
 
 //deletar um estudio/delete/findById/remove
+router.delete('/:id', controller.deleteEstudio)
 
 module.exports = router

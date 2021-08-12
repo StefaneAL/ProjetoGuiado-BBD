@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { updateOne } = require('../models/estudio')
 const Estudio = require('../models/estudio')
 
 //ok
@@ -35,26 +36,51 @@ const criateStudio =  async (req, res) => {
     }
   }
 
-//não atualizaatualiza mas ainda não devolve 
-const updateStudio =async (req,res) => {
-    const estudioId = req.params.id
-    let novoNome = req.body.nome
-    
-    Estudio.findByIdAndUpdate(
-      estudioId, 
-      {$set: {nome:novoNome}}, 
-      function(err){
+//ok
+const updateEstudio = async(req, res) => {
+
+  try {
+    const estudio = await Estudio.findById(req.params.id)
+    //Se você não encontrar me retorne o erro
+    if (estudio == null) {
+      return res.status(404).json({message: "estudio não encontrado"})
+    }
+    //No corpo da requisição tem algo digitado, considere o que tiver digitado como minha alteração
+    if (req.body.nome != null) {
+      estudio.nome = req.body.nome
+    }
+    //Já salvou?
+    const estudioAtualizado = await estudio.save()
+    //Retornando o documento atualizado com o código de sucesso
+    res.status(200).json(estudioAtualizado)
+
+  } catch (err) {
+    //Se houve qulquer erro acima, mostre qual erro foi esse 
+    res.status(500).json({message: err.message})
+  }
+}
+
+const deleteEstudio = async(req,res) => {
+   
+    const estudio = await Estudio.findById(req.params.id)
+    if (estudio == null) {
+      return res.status(404).json({message: "Estudio não encontrado"})
+    }
+    estudio.deleteOne(
+      {id: req.params.id},
+      function (err){
         if(err){
           res.status(500).json({message: err.message})
         }else{
-          res.status(200).json()
+          res.status(200).json({message: "Estudio deletado com sucesso"})
         }
-      } 
-    )  
-  }
+      })
+    }
+
 
 module.exports = {
     getAll,
     criateStudio,
-    updateStudio
+    updateEstudio,
+    deleteEstudio
 }

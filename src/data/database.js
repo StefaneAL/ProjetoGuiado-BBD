@@ -8,13 +8,6 @@ const connect = () => {mongoose.connect('mongodb://localhost:27017/filmes-db', {
   .catch(err => console.err)
 }
 
-// const findById = (model, id) => {
-//   let filteredData = model.find(item => item._id == id);
-
-//   return filteredData;
-// };
-
 module.exports = { 
-  connect, 
-  //findById 
+  connect
 }

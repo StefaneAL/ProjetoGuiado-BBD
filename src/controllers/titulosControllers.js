@@ -37,7 +37,23 @@ const criateTitle = async (req, res) => {
     }
   }
 
+const getAllGhibli = async (req, res,next) => {
+    const titulos = await Titulo.find().populate('estudio')
+    const titulosFiltrados = titulos.filter(titulo => titulo.estudio.nome == "ghibli")
+    res.json(titulosFiltrados)
+}
 
+const getAllPixar = async (req, res,next) => {
+  const titulos = await Titulo.find().populate('estudio')
+  const titulosFiltrados = titulos.filter(titulo => titulo.estudio.nome == "Pixar")
+  res.json(titulosFiltrados)
+}
+
+const getAllMarvel = async (req, res,next) => {
+  const titulos = await Titulo.find().populate('estudio')
+  const titulosFiltrados = titulos.filter(titulo => titulo.estudio.nome == "Marvel")
+  res.json(titulosFiltrados)
+}
 //"/titulos/[ID]" Deverá alterar informação específica 
 //const updateInfo = 
 //dentro de um titulo por id específico e retorna o título alterado
@@ -55,5 +71,8 @@ const criateTitle = async (req, res) => {
 module.exports = {
     getAll,
     criateTitle,
-    updateInfo
+    getAllGhibli,
+    getAllPixar,
+    getAllMarvel
+    //updateInfo
 }
