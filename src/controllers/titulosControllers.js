@@ -37,19 +37,23 @@ const criateTitle = async (req, res) => {
     }
   }
 
+
 //"/titulos/[ID]" Deverá alterar informação específica 
+//const updateInfo = 
 //dentro de um titulo por id específico e retorna o título alterado
   // const pega id do body
-  
+  //await id
+  //valido se id existe com try/catch
   //switch
     //let pega info do body
     //case ifo === X 
       //faça a alteração na let, retorne let alterada  e brake
       //se let errada enterege uma mensagem
 
-  //valido se id existe com try/catch
+  
 
 module.exports = {
     getAll,
-    criateTitle
+    criateTitle,
+    updateInfo
 }

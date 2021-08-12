@@ -10,5 +10,7 @@ router.get('/',controller.getAll )
 router.post('/', controller.criateTitle)
 
 ///"/titulos/[ID] altera informação específica 
+router.patch('/:id', controller.updateInfo)
+
 
 module.exports = router
