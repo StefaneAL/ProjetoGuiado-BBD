@@ -11,6 +11,8 @@ const estudioSchema = new mongoose.Schema({
     required: true,
     default: new Date
   }
+}, {
+  versionKey: false
 })
 
 module.exports = mongoose.model('estudio', estudioSchema)

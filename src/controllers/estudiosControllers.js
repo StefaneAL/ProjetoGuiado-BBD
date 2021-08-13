@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { updateOne } = require('../models/estudio')
 const Estudio = require('../models/estudio')
 
 //ok
@@ -59,7 +58,7 @@ const updateEstudio = async(req, res) => {
     res.status(500).json({message: err.message})
   }
 }
-
+//ok
 const deleteEstudio = async(req,res) => {
    
     const estudio = await Estudio.findById(req.params.id)

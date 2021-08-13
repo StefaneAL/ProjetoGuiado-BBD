@@ -6,6 +6,17 @@ const getAll = async (req, res) => {
     res.status(200).json(titulos)
   }
 
+const getId = async (req, res) =>{
+  const getTituloById = await Titulo.findById(req.params.id)
+  Titulo.findOne({id:req.params.id},
+    function(err){
+      if(err){
+        res.status(500).json({message: err.message})
+      }else{
+        res.status(200).json(getTituloById)
+      }
+    })
+}
 
 const criateTitle = async (req, res) => {
     const titulo = new Titulo({
@@ -54,25 +65,38 @@ const getAllMarvel = async (req, res,next) => {
   const titulosFiltrados = titulos.filter(titulo => titulo.estudio.nome == "Marvel")
   res.json(titulosFiltrados)
 }
-//"/titulos/[ID]" Deverá alterar informação específica 
-//const updateInfo = 
-//dentro de um titulo por id específico e retorna o título alterado
-  // const pega id do body
-  //await id
-  //valido se id existe com try/catch
-  //switch
-    //let pega info do body
-    //case ifo === X 
-      //faça a alteração na let, retorne let alterada  e brake
-      //se let errada enterege uma mensagem
 
+const updateInfo = async(req, res) => {
   
+  try {
+    const titulo = await Titulo.findById(req.params.id)
+    if (titulo == null) {
+      return res.status(404).json({message: "titulo não foi encontrado"})
+    }
+    if (req.body.nome != null) {
+      titulo.nome = req.body.nome
+    }
+    if(req.body.genero != null){
+      titulo.genero = req.body.genero
+    }
+
+    if(req.body.descricao != null){
+      titulo.descricao = req.body.descricao
+    }
+    const tituloAtualizado = await titulo.save()
+    res.status(200).json(tituloAtualizado)
+
+  } catch (err) {
+    res.status(500).json({message: err.message})
+  }
+}
 
 module.exports = {
     getAll,
     criateTitle,
     getAllGhibli,
     getAllPixar,
-    getAllMarvel
-    //updateInfo
+    getAllMarvel,
+    updateInfo,
+    getId
 }

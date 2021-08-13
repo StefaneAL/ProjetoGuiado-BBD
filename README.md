@@ -1,8 +1,8 @@
 # E aqui vamos nos!
 
-## o objetivo é cumprir um contrato completo 
+## O objetivo é cumprir um contrato completo 
 
-## o contrato consiste em :
+## O contrato consiste em :
 
 ### Requisitos 
 find/filter
@@ -21,8 +21,11 @@ find/filter
 - ✅  "/estudios/[ID]" Deverá deletar estudio por id específico e retorna mensagem amigável
 
 - ✅  "/titulos/[ID]" Deverá alterar informação específica dentro de um titulo por id específico e retorna o título alterado
-- [ ]  "/estudios/[ID]" Deverá alterar informação específica dentro de um estudio por id específico e retorna o estudio alterado
+- ✅  "/estudios/[ID]" Deverá alterar informação específica dentro de um estudio por id específico e retorna o estudio alterado
 
+## extra
+- ✅ "/titulos/[ID]" devera retornar um titulo por id
+- [ ] "/titulos/[ID]" devera retornar um Estudio por id
 
 ### Regras de negócio
 

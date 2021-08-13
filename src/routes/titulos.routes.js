@@ -19,7 +19,10 @@ router.get('/pixar', controller.getAllPixar)
 router.get('/marvel', controller.getAllMarvel)
 
 ///"/titulos/[ID] altera informação específica 
-//router.patch('/:id', controller.updateInfo)
+router.patch('/:id', controller.updateInfo)
+
+//busca titulo por id
+router.get('/:id', controller.getId)
 
 
 module.exports = router
