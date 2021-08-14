@@ -4,10 +4,10 @@ const Titulo = require('../models/titulo')
 const getAll = async (req, res) => {
     const titulos = await Titulo.find().populate("estudio")
     res.status(200).json(titulos)
-  }
+}
 
 const getId = async (req, res) =>{
-  const getTituloById = await Titulo.findById(req.params.id)
+  const getTituloById = await Titulo.findById(req.params.id).populate("estudio")
   Titulo.findOne({id:req.params.id},
     function(err){
       if(err){
@@ -46,21 +46,21 @@ const criateTitle = async (req, res) => {
          message: err.message
         })
     }
-  }
-
-const getAllGhibli = async (req, res,next) => {
-    const titulos = await Titulo.find().populate('estudio')
-    const titulosFiltrados = titulos.filter(titulo => titulo.estudio.nome == "ghibli")
-    res.json(titulosFiltrados)
 }
 
-const getAllPixar = async (req, res,next) => {
+const getAllGhibli = async (req, res,next) => {
+  const titulos = await Titulo.find().populate('estudio')
+  const titulosFiltrados = titulos.filter(titulo => titulo.estudio.nome == "ghibli")
+  res.json(titulosFiltrados)
+}
+
+const getAllPixar = async (req, res) => {
   const titulos = await Titulo.find().populate('estudio')
   const titulosFiltrados = titulos.filter(titulo => titulo.estudio.nome == "Pixar")
   res.json(titulosFiltrados)
 }
 
-const getAllMarvel = async (req, res,next) => {
+const getAllMarvel = async (req, res) => {
   const titulos = await Titulo.find().populate('estudio')
   const titulosFiltrados = titulos.filter(titulo => titulo.estudio.nome == "Marvel")
   res.json(titulosFiltrados)
@@ -91,6 +91,23 @@ const updateInfo = async(req, res) => {
   }
 }
 
+const deleteTitulo= async(req,res) => {
+  const titulos = await Titulo.findById(req.params.id)
+  if(estudio == null ){
+    return res.status(404).json({message: "Titulo não encontrado"})
+  }
+  titulos.deleteOne(
+    {id: req.params.id},
+    function(err){
+      if(err){
+        res.status(500).json({message: err.message})
+      }else{
+        res.status(200).json({message: "Titulo deletado com sucesso"})
+      }
+    }
+  )
+}
+
 module.exports = {
     getAll,
     criateTitle,
@@ -98,5 +115,6 @@ module.exports = {
     getAllPixar,
     getAllMarvel,
     updateInfo,
-    getId
+    getId,
+    deleteTitulo
 }

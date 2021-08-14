@@ -9,8 +9,6 @@ router.get('/',controller.getAll)
 //criar um novo estudio
 router.post('/', controller.criateStudio)
 
-//listar um estudio/get/findById
-
 //atualizar uma informacao especifica num estudio
 router.patch('/:id', controller.updateEstudio)
 

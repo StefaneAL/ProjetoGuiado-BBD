@@ -1,13 +1,12 @@
 const mongoose = require('mongoose')
 const Estudio = require('../models/estudio')
 
-//ok
+
 const getAll =  async (req, res) => {
     const estudios = await Estudio.find()
     res.json(estudios)
-  }
+}
 
-//ok
 const criateStudio =  async (req, res) => {
     const estudio = new Estudio({
       _id: new mongoose.Types.ObjectId(),
@@ -33,32 +32,26 @@ const criateStudio =  async (req, res) => {
         message: err.message
       })
     }
-  }
+}
 
-//ok
 const updateEstudio = async(req, res) => {
 
   try {
     const estudio = await Estudio.findById(req.params.id)
-    //Se você não encontrar me retorne o erro
     if (estudio == null) {
       return res.status(404).json({message: "estudio não encontrado"})
     }
-    //No corpo da requisição tem algo digitado, considere o que tiver digitado como minha alteração
     if (req.body.nome != null) {
       estudio.nome = req.body.nome
     }
-    //Já salvou?
     const estudioAtualizado = await estudio.save()
-    //Retornando o documento atualizado com o código de sucesso
     res.status(200).json(estudioAtualizado)
 
   } catch (err) {
-    //Se houve qulquer erro acima, mostre qual erro foi esse 
     res.status(500).json({message: err.message})
   }
 }
-//ok
+
 const deleteEstudio = async(req,res) => {
    
     const estudio = await Estudio.findById(req.params.id)
@@ -74,7 +67,7 @@ const deleteEstudio = async(req,res) => {
           res.status(200).json({message: "Estudio deletado com sucesso"})
         }
       })
-    }
+}
 
 
 module.exports = {
