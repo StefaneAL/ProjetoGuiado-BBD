@@ -17,7 +17,7 @@ find/filter
 - ✅  **"/estudios"** Deverá criar um estudio 
 - ✅  **"/titulos"**  Deverá criar um título 
 
-- [ ]  "/titulos/[ID]" Deverá deletar titulo por id específico e retorna mensagem amigável
+- ✅  "/titulos/[ID]" Deverá deletar titulo por id específico e retorna mensagem amigável
 - ✅  "/estudios/[ID]" Deverá deletar estudio por id específico e retorna mensagem amigável
 
 - ✅  "/titulos/[ID]" Deverá alterar informação específica dentro de um titulo por id específico e retorna o título alterado
@@ -25,7 +25,6 @@ find/filter
 
 ## extra
 - ✅ "/titulos/[ID]" devera retornar um titulo por id
-- [ ] "/titulos/[ID]" devera retornar um Estudio por id
 
 ### Regras de negócio
 
@@ -101,99 +100,3 @@ find/filter
 <br>
 <br>
 
-
-
-## *Aqui vai cada emoção que senti no momento de cumprir os requisitos*
-* Já tinhamos feito os {GET} para checar `estudio` e `titulo` em aula e tambem fizemos o {POST} para criar o `estudio`, eu tive um pouco de dificuldade em usar o `.populate` então, depois de alguma pesquisa, entendi que meu ero estava na forma como estava declarando o `"_id":` no `Postman`, mas depois de compreender as etapas comecei a cadastrar os`titulo`. 
-
-* Quando terminei de cadastrar os filmes e checar vi que ja tinha cumprido a regra de negocio 
-
-  <img src="https://media.giphy.com/media/43VhxnrEOQ44U/giphy.gif" width="150" height="100" />
-
-
- ### Ficou assim : 
-  * **"/estudios"** Deverá retornar todos os estudios cadastrados
-  ```javascript
-  router.get('/', async (req, res) => {
-  const estudios = await Estudio.find()
-  res.json(estudios)
-  })
-```
-* **"/titulos"** Deverá retornar todos os títulos cadastrados, cada um fazendo referencia ao seu respectivo estudio
-
-```javascript
-router.get('/', async (req, res) => {
-  const titulos = await Titulo.find().populate("estudio")
-  res.status(200).json(titulos)
-})
-```
-* **"/estudios"** Deverá criar um estudio 
-
-  * Não deverá ser possível criar estudio com o mesmo nome
-
-```javascript
-router.post('/', async (req, res) => {
-  const estudio = new Estudio({
-    _id: new mongoose.Types.ObjectId(),
-    nome: req.body.nome,
-    criadoEm: req.body.criadoEm,
-  })
- 
-  const estudioJaExiste = await Estudio.findOne({
-    nome: req.body.nome
-  })
-
-  if(estudioJaExiste){
-    return res.status(409).json({
-      erro: 'Estudio já cadastrado'
-    })
-  }
-
-  try{
-    const novoEstudio = await estudio.save()
-    res.status(201).json(novoEstudio)
-  }catch{
-    res.status(400).json({
-      message: err.message
-    })
-  }
-})
-```
-
-* **"/titulos"**  Deverá criar um título 
-
-  * Não deverá ser possível criar título com o mesmo nome
-  
-  * Para criar um novo título, deverá vincular no momento da criação a um estudio já existente no sistema, utilizando o numero do id do estudio correspondente no corpo da requisição
-
-```javascript
-router.post('/', async (req, res) => {
-  const titulo = new Titulo({
-    _id: new mongoose.Types.ObjectId(),
-    nome: req.body.nome,
-    genero: req.body.genero,
-    descricao: req.body.descricao,
-    estudio: req.body.estudio,
-    criadoEm: req.body.criadoEm
-  })
-
-  const tituloJaExistente = await Titulo.findOne({
-    nome: req.body.nome
-  })
-
-  if(tituloJaExistente){
-    return res.status(409).json({
-      erro: 'Titulo já existente'
-    })
-  }
-
-  try {
-    const novoTitulo = await titulo.save()
-    res.status(201).json(novoTitulo)
-  } catch (err) {
-    res.status(400).json({
-       message: err.message
-      })
-  }
-})
-```
