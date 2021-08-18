@@ -38,7 +38,7 @@ const updateEstudio = async(req, res) => {
 
   try {
     const estudio = await Estudio.findById(req.params.id)
-    if (estudio == null) {
+    if (!estudio) {
       return res.status(404).json({message: "estudio não encontrado"})
     }
     if (req.body.nome != null) {
