@@ -7,11 +7,11 @@ router.get('/',controller.getAll )
 
 router.post('/', controller.criateTitle)
 
-router.get('/ghibli', controller.getAllGhibli)
+router.get('/titulos/ghibli', controller.getAllGhibli)
 
-router.get('/pixar', controller.getAllPixar)
+router.get('/titulos/pixar', controller.getAllPixar)
 
-router.get('/marvel', controller.getAllMarvel)
+router.get('/titulos/marvel', controller.getAllMarvel)
 
 router.patch('/:id', controller.updateInfo)
 
